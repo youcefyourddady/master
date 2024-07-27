@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: url('/static/your-background-image.jpg') no-repeat center center fixed;
+            background-size: cover; /* تأكد من أن الصورة تغطي الخلفية بالكامل */
+            position: relative;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            background: rgba(128, 128, 128, 0.7); /* اللون الرمادي مع شفافية */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+        h1 {
+            margin: 0;
+            color: #FFC0CB; /* وردي */
+        }
+        p {
+            margin-top: 10px;
+            color: #fff; /* لون الكتابة أبيض */
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            border: none;
+            background: linear-gradient(45deg, #800080, #FFC0CB); /* تدرج لوني من البنفسجي إلى الوردي */
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #7A2C7C, #F8A1A1); /* تدرج لوني أغمق عند التحويم */
+        }
+        .monster-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10rem;
+            color: rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+            pointer-events: none;
+            animation: moveMonster 20s linear infinite;
+            z-index: -1;
+        }
+        @keyframes moveMonster {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-150%, -150%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Our Site!</h1>
+        <p>We are glad to have you here. Please click below to proceed.</p>
+        <button onclick="window.location.href='/phone_number_form'">Get Started</button>
+    </div>
+    <div class="monster-text">Monster</div>
+</body>
+</html>

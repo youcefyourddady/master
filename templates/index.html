@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/background-image.jpg'); /* استبدل بالمسار الفعلي للصورة */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* تأمين الخلفية عند التمرير */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8); /* لون داكن مع شفافية لتحسين الرؤية */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* ظل أكثر وضوحًا */
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            margin: 0;
+            color: #FFC0CB; /* وردي */
+        }
+        p {
+            margin-top: 10px;
+            color: #fff; /* لون الكتابة أبيض */
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            border: none;
+            background: linear-gradient(45deg, #800080, #FFC0CB); /* تدرج لوني من البنفسجي إلى الوردي */
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #7A2C7C, #F8A1A1); /* تدرج لوني أغمق عند التحويم */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Our Service</h1>
+        <p>Please click the button below to start the registration process. Get a lot of internet from our company. We are always at your service.</p>
+        <button onclick="startRegistration()">Start</button>
+    </div>
+    <script>
+        function startRegistration() {
+            window.location.href = '/phone_number_form';
+        }
+    </script>
+</body>
+</html>

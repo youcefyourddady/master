@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('/static/background-image.jpg') no-repeat center center fixed;
+            background-size: cover; /* تأكد من أن الصورة تغطي الخلفية بالكامل */
+        }
+        .container {
+            background: rgba(128, 128, 128, 0.7); /* اللون الرمادي مع شفافية */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 50px;
+            color: white; /* لون الكتابة أبيض */
+            animation: spreadEffect 1s ease-in-out;
+        }
+        h1 {
+            color: #28a745; /* لون النجاح */
+            font-size: 2em;
+        }
+        p {
+            color: #fff;
+            font-size: 1.2em;
+        }
+        @keyframes spreadEffect {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Success!</h1>
+        <p>Your registration was successful To check out your Internet,go to choof.ooredoo.dz . Please wait 2 minutes before you can start again.</p>
+    </div>
+</body>
+</html>
